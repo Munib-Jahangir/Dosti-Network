@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends - Dosti Network</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="freinds.css">
+</head>
+<body>
+    <div class="theme-toggle" id="themeToggle">
+        <i>🌙</i>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>Dosti Network</h1>
+            <div class="user-info">
+                <span id="user-name">User</span>
+                <button id="logout-btn">Logout</button>
+            </div>
+        </header>
+
+        <main>
+            <section class="friends-section">
+                <h2>Your Friends</h2>
+                <div class="friends-container" id="friends-container">
+                    <!-- Your friends will be displayed here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="../Dashboard/Dashboard.html" class="nav-item">
+            <i class="fas fa-home"></i>
+        </a>
+        <a href="../Add freind/addfriends.html" class="nav-item">
+            <i class="fas fa-user-plus"></i>
+        </a>
+        <a href="../Freind Request/index.html" class="nav-item">
+            <i class="fas fa-user-friends"></i>
+        </a>
+        <a href="#" class="nav-item active">
+            <i class="fas fa-users"></i>
+        </a>
+        <a href="../profile/profile.html" class="nav-item">
+            <i class="fas fa-user"></i>
+        </a>
+    </nav>
+
+    <!-- Firebase SDK -->
+    <script type="module" src="../../AUTH/config.js"></script>
+    <script type="module" src="friends.js"></script>
+    
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or respect OS preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
+            body.classList.add('light-mode');
+            themeIcon.textContent = '☀️';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>

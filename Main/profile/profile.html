@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Dosti Network</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <div class="theme-toggle" id="themeToggle">
+        <i>🌙</i>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>Dosti Network</h1>
+            <div class="user-info">
+                <span id="user-name">User</span>
+                <button id="logout-btn">Logout</button>
+            </div>
+        </header>
+
+        <main>
+            <section class="profile-section">
+                <h2>Your Profile</h2>
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <div class="profile-avatar" id="profile-avatar"></div>
+                        <div class="profile-basic-info">
+                            <h3 id="profile-name">Loading...</h3>
+                            <p id="profile-email">Loading...</p>
+                            <p id="profile-id">ID: <span id="user-id">Loading...</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-details">
+                        <h3>Profile Details</h3>
+                        <form id="profile-form">
+                            <div class="form-group">
+                                <label for="display-name">Display Name:</label>
+                                <input type="text" id="display-name" placeholder="Enter your display name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="bio">Bio:</label>
+                                <textarea id="bio" placeholder="Tell us about yourself"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number:</label>
+                                <input type="tel" id="phone" placeholder="Enter your phone number">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="location">Location:</label>
+                                <input type="text" id="location" placeholder="Enter your location">
+                            </div>
+                            
+                            <button type="submit">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="../Dashboard/Dashboard.html" class="nav-item">
+            <i class="fas fa-home"></i>
+        </a>
+        <a href="../Add freind/addfriends.html" class="nav-item">
+            <i class="fas fa-user-plus"></i>
+        </a>
+        <a href="../Freind Request/index.html" class="nav-item">
+            <i class="fas fa-user-friends"></i>
+        </a>
+        <a href="../Freinds/friends.html" class="nav-item">
+            <i class="fas fa-users"></i>
+        </a>
+        <a href="#" class="nav-item active">
+            <i class="fas fa-user"></i>
+        </a>
+    </nav>
+
+    <!-- Firebase SDK -->
+    <script type="module" src="../../AUTH/config.js"></script>
+    <script type="module" src="profile.js"></script>
+    
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or respect OS preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
+            body.classList.add('light-mode');
+            themeIcon.textContent = '☀️';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>
